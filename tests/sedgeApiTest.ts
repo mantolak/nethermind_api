@@ -60,6 +60,7 @@ describe('Sedge API', function () {
         response = await helpers.postResponse(payload);
         helpers.verifyResponseObjects(response)
         data = await response.json()
+        console.log(data)
         helpers.verifySchema('responseSchema/getBlockByNumber.json', data)
     });
 
