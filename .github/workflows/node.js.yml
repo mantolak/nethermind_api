@@ -31,4 +31,6 @@ jobs:
             --el-extra-flag Sync.DownloadReceiptsInFastSync=false \
             --el-extra-flag JsonRpc.EnabledModules=[Eth,TxPool,Web3,Net,Health,Rpc,Debug] \
             --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/ >>sedge.logs
+    - run: ./sedge run -p . >>sedge.logs
     - run: npm install
+    - run: ls -l
