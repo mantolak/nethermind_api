@@ -24,5 +24,10 @@ jobs:
     - run: ./sedge deps install
     - run: ./sedge generate --logging none -p $HOME full-node --map-all --no-mev-boost --no-validator --network chiado -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false --el-extra-flag Sync.DownloadReceiptsInFastSync=false --el-extra-flag JsonRpc.EnabledModules=[Eth,TxPool,Web3,Net,Health,Rpc,Debug] --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/
     - run: docker compose up -d
+    - name: Wait 1 min for State Node Sync and start API tests
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '60s'
+    - run: ls -l
     - run: npm install
     - run: npm run testApi
