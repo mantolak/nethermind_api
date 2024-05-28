@@ -123,24 +123,12 @@
           "hash",
           "logsBloom",
           "miner",
-          "nonce",
           "number",
           "parentHash",
           "receiptsRoot",
           "sha3Uncles",
           "size",
-          "stateRoot",
-          "totalDifficulty",
-          "timestamp",
-          "baseFeePerGas",
-          "transactions",
-          "transactionsRoot",
-          "uncles",
-          "withdrawals",
-          "withdrawalsRoot",
-          "blobGasUsed",
-          "excessBlobGas",
-          "parentBeaconBlockRoot"
+          "stateRoot"
         ]
       },
       "id": {
