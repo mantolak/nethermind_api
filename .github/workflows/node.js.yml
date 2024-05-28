@@ -1,10 +1,6 @@
 name: Nethermind API tests CI
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: push
 
 jobs:
   build:
@@ -13,18 +9,25 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Set docker service
-      uses: hoverkraft-tech/compose-action@v1.5.1
-      with:
-        compose-file: "./docker-compose.yml"  
     - uses: actions/checkout@v4
-      name: Use Node.js ${{ matrix.node-version }}
-    - uses: actions/setup-node@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - run: curl -L https://github.com/NethermindEth/sedge/releases/download/v1.3.2/sedge-v1.3.2-linux-amd64 --output sedge
+    - run: chmod +x sedge
+    - run: ./sedge deps install
+    - run: ./sedge generate --logging none -p $HOME full-node --map-all --no-mev-boost --no-validator --network chiado -c lighthouse:sigp/lighthouse:latest -e nethermind:nethermindeth/nethermind:master --el-extra-flag Sync.NonValidatorNode=true --el-extra-flag Sync.DownloadBodiesInFastSync=false --el-extra-flag Sync.DownloadReceiptsInFastSync=false --el-extra-flag JsonRpc.EnabledModules=[Eth,TxPool,Web3,Net,Health,Rpc,Debug] --cl-extra-flag checkpoint-sync-url=http://139.144.26.89:4000/
+    - run: docker compose up -d
+    - name: Wait 1 min for State Node Sync and start API tests
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '60s'
+    - run: ls -l
     - run: npm install
     - run: npm run testApi
