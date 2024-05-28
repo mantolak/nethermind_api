@@ -20,5 +20,6 @@ jobs:
         cache: 'npm'
 
     - run: curl https://github.com/NethermindEth/sedge/releases/download/v1.3.2/sedge-v1.3.2-linux-arm64 --output sedge
+    - run: chmod +x sedge
     - run: ./sedge deps install
     - run: npm install
