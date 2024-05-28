@@ -4,7 +4,7 @@ import testData from '../helpers/requestPayloads'
 const expect = chai.expect;
 chai.use(require('chai-json-schema'));
 
-describe('Sedge API hello', function () {
+describe('Sedge API', function () {
 
     it('eth_syncing', async function () {
         const response = await helpers.postResponse(testData.syncing);
