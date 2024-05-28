@@ -1,0 +1,29 @@
+{
+  "name": "sedge",
+  "version": "1.0.0",
+  "description": "sedge_api_tests",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:watch": "tsc --watch",
+    "testApi": "tsc && mocha -r ts-node/register tests/ --slow 2000 --timeout 30000"
+  },
+  "author": "Marcin Antolak",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/chai-http": "^4.2.0",
+    "@types/chai-json-schema": "^1.4.10",
+    "@types/mocha": "^10.0.6",
+    "chai": "^4.4.1",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.4.0",
+    "chai-json-schema": "^1.5.1",
+    "mocha": "^10.4.0",
+    "mochawesome": "^7.1.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "yarn": "^1.22.22"
+  }
+}
